@@ -27,39 +27,39 @@ ADD . /bitshares-core
 WORKDIR /bitshares-core
 
 # Compile
-RUN \
-    git submodule sync --recursive && \
-    git submodule update --init --recursive && \
-    cmake \
-        -DCMAKE_BUILD_TYPE=Release \
-        . && \
-    make witness_node && \
-    make install && \
+#RUN \
+#    git submodule sync --recursive && \
+#    git submodule update --init --recursive && \
+#    cmake \
+#        -DCMAKE_BUILD_TYPE=Release \
+#        . && \
+#    make witness_node && \
+#    make install && \
     #
     # Obtain version
-    mkdir /etc/bitshares && \
-    git rev-parse --short HEAD > /etc/bitshares/version && \
-    cd / && \
-    rm -rf /bitshares-core
+#    mkdir /etc/bitshares && \
+#    git rev-parse --short HEAD > /etc/bitshares/version && \
+#    cd / && \
+#    rm -rf /bitshares-core
 
 # Home directory $HOME
 WORKDIR /
-RUN useradd -s /bin/bash -m -d /var/lib/bitshares bitshares
-ENV HOME /var/lib/bitshares
-RUN chown bitshares:bitshares -R /var/lib/bitshares
+#RUN useradd -s /bin/bash -m -d /var/lib/bitshares bitshares
+#ENV HOME /var/lib/bitshares
+#RUN chown bitshares:bitshares -R /var/lib/bitshares
 
 # Volume
-VOLUME ["/var/lib/bitshares", "/etc/bitshares"]
+#VOLUME ["/var/lib/bitshares", "/etc/bitshares"]
 
 # rpc service:
-EXPOSE 8090
+#EXPOSE 8090
 # p2p service:
-EXPOSE 2001
+#EXPOSE 2001
 
 # default exec/config files
-ADD docker/default_config.ini /etc/bitshares/config.ini
-ADD docker/bitsharesentry.sh /usr/local/bin/bitsharesentry.sh
-RUN chmod a+x /usr/local/bin/bitsharesentry.sh
+#ADD docker/default_config.ini /etc/bitshares/config.ini
+#ADD docker/bitsharesentry.sh /usr/local/bin/bitsharesentry.sh
+#RUN chmod a+x /usr/local/bin/bitsharesentry.sh
 
 # default execute entry
-CMD /usr/local/bin/bitsharesentry.sh
+#CMD /usr/local/bin/bitsharesentry.sh
